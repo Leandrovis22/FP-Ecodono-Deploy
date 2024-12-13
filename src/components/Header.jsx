@@ -129,7 +129,7 @@ const Header = () => {
       {/* Mobile Menu */}
       <ul className={`list-none m-0 p-0 w-full ${showMobileMenu ? 'flex flex-col items-end' : 'hidden'}`}>
         <li className="my-2 pr-4"><Link to="/home" className="no-underline text-black hover:text-[#F1702A] text-base">Home</Link></li>
-        <li className="my-2 pr-4"><Link to="/catalogo" className="no-underline text-black hover:text-[#F1702A] text-base">Productos</Link></li>
+        <li className="my-2 pr-4"><Link to="/catalog" className="no-underline text-black hover:text-[#F1702A] text-base">Productos</Link></li>
         <li className="my-2 pr-4"><a href="#" className="no-underline text-black hover:text-[#F1702A] text-base">Servicios</a></li>
         <li className="my-2 pr-4"><Link to="/about" className="no-underline text-black hover:text-[#F1702A] text-base">About us</Link></li>
         <li className="md:hidden my-2 pr-4">
