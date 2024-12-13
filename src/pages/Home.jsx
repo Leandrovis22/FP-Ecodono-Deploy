@@ -21,7 +21,9 @@ export default function Home() {
                                 <p>Productos de alta calidad</p>
                             </div>
                             <div className="stat">
-                                <span className="infinity">∞</span>
+                                <span className="h-[36px] relative">
+                                <img src="/assets/home/infinity-svgrepo-com.svg" alt="" className="relative sm-631:absolute size-[60px] top-[-3%] sm-631:left-[34%]" />
+                                </span>
                                 <p>Vidas cambiadas</p>
                             </div>
                         </div>
