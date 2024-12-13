@@ -9,6 +9,7 @@ import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 const useFormValidation = (initialState, validationRules) => {
   const [values, setValues] = useState(initialState);
   const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
   const [isValid, setIsValid] = useState(false);
 
   const handleChange = (e) => {
@@ -16,11 +17,14 @@ const useFormValidation = (initialState, validationRules) => {
     const updatedValues = { ...values, [name]: value };
     setValues(updatedValues);
 
+    // Mark the field as touched
+    setTouched(prev => ({ ...prev, [name]: true }));
+
     // Validate each field
     const newErrors = {};
     Object.keys(validationRules).forEach(field => {
       const rule = validationRules[field];
-      if (!rule.regex.test(updatedValues[field])) {
+      if (touched[field] && !rule.regex.test(updatedValues[field])) {
         newErrors[field] = rule.message;
       }
     });
@@ -32,10 +36,11 @@ const useFormValidation = (initialState, validationRules) => {
   const resetForm = () => {
     setValues(initialState);
     setErrors({});
+    setTouched({});
     setIsValid(false);
   };
 
-  return { values, errors, isValid, handleChange, resetForm };
+  return { values, errors, isValid, handleChange, resetForm, touched };
 };
 
 // Login Component
@@ -61,7 +66,8 @@ const LoginForm = () => {
     errors,
     isValid,
     handleChange,
-    resetForm
+    resetForm,
+    touched
   } = useFormValidation(
     { userEmail: '', userPassword: '' },
     validationRules
@@ -69,6 +75,21 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!values.userEmail || !values.userPassword) {
+      setIsSuccess(false);
+      setShowAlert(true);
+      
+      // Modificar el mensaje de error
+      errors.userEmail = !values.userEmail ? "Todos los campos son obligatorios" : errors.userEmail;
+      errors.userPassword = !values.userPassword ? "Todos los campos son obligatorios" : errors.userPassword;
+      
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+      return;
+    }
+
     if (isValid) {
       // Successful login logic
       setIsSuccess(true);
@@ -111,7 +132,7 @@ const LoginForm = () => {
           className={errors.userEmail ? 'error text-[#a7a7a7]' : 'text-[#a7a7a7]'}
         />
       </label>
-      {errors.userEmail && <div className="alerta">{errors.userEmail}</div>}
+      {touched.userEmail && errors.userEmail && <div className="alerta">{errors.userEmail}</div>}
 
       <label>
       <FontAwesomeIcon icon={faLock} color="#a7a7a7" />
@@ -124,7 +145,7 @@ const LoginForm = () => {
           className={errors.userPassword ? 'error text-[#a7a7a7]' : 'text-[#a7a7a7]'}
         />
       </label>
-      {errors.userPassword && <div className="alerta">{errors.userPassword}</div>}
+      {touched.userPassword && errors.userPassword && <div className="alerta">{errors.userPassword}</div>}
 
       <input
         type="submit"
@@ -168,7 +189,8 @@ const RegisterForm = () => {
     errors,
     isValid,
     handleChange,
-    resetForm
+    resetForm,
+    touched
   } = useFormValidation(
     { userName: '', userEmail: '', userPassword: '' },
     validationRules
@@ -176,6 +198,22 @@ const RegisterForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!values.userName || !values.userEmail || !values.userPassword) {
+      setIsSuccess(false);
+      setShowAlert(true);
+      
+      // Modificar los mensajes de error
+      errors.userName = !values.userName ? "Todos los campos son obligatorios" : errors.userName;
+      errors.userEmail = !values.userEmail ? "Todos los campos son obligatorios" : errors.userEmail;
+      errors.userPassword = !values.userPassword ? "Todos los campos son obligatorios" : errors.userPassword;
+      
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+      return;
+    }
+
     if (isValid) {
       // Successful registration logic
       setIsSuccess(true);
@@ -216,7 +254,7 @@ const RegisterForm = () => {
           className={errors.userName ? 'error text-[#a7a7a7]' : 'text-[#a7a7a7]'}
         />
       </label>
-      {errors.userName && <div className="alerta">{errors.userName}</div>}
+      {touched.userName && errors.userName && <div className="alerta">{errors.userName}</div>}
 
       <label>
       <FontAwesomeIcon icon={faEnvelope} color="#a7a7a7"/>
@@ -229,7 +267,7 @@ const RegisterForm = () => {
           className={errors.userEmail ? 'error text-[#a7a7a7]' : 'text-[#a7a7a7]'}
         />
       </label>
-      {errors.userEmail && <div className="alerta">{errors.userEmail}</div>}
+      {touched.userEmail && errors.userEmail && <div className="alerta">{errors.userEmail}</div>}
 
       <label>
       <FontAwesomeIcon icon={faLock} color="#a7a7a7" />
@@ -242,7 +280,7 @@ const RegisterForm = () => {
           className={errors.userPassword ? 'error text-[#a7a7a7]' : 'text-[#a7a7a7]'}
         />
       </label>
-      {errors.userPassword && <div className="alerta">{errors.userPassword}</div>}
+      {touched.userPassword && errors.userPassword && <div className="alerta">{errors.userPassword}</div>}
 
       <input
         type="submit"
@@ -329,8 +367,8 @@ export default function Login() {
           <div className="overlay-container">
             <div className="overlay">
               <div className="overlay-left">
-                <h1>¡Bienvenido de vuelta!</h1>
-                <p>Para mantenerse conectado con nosotros, inicie sesión con su información personal</p>
+                <h1>¡Bienvenido!</h1>
+                <p>Para seguir ayudando a cuidar nuestro ambiente inicie sesion</p>
                 <button
                   id="signIn"
                   onClick={() => setIsRightPanelActive(false)}
