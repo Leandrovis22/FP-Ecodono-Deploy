@@ -28,9 +28,9 @@ export default function Home() {
                     </div>
                 </div>
                 <section className="partners">
-                    <img src="/src/assets/home/logo pescar.png" alt="Fundación Pescar" />
-                    <img src="/src/assets/home/logo karuna.png" alt="Karuna Charitable Foundation" />
-                    <img src="/src/assets/home/logo valtech.png" alt="Valtech" />
+                    <img src="/assets/home/logo pescar.png" alt="Fundación Pescar" />
+                    <img src="/assets/home/logo karuna.png" alt="Karuna Charitable Foundation" />
+                    <img src="/assets/home/logo valtech.png" alt="Valtech" />
                 </section>
                 <h2 className="title top-border">
                     Moda Sustentable a tu Alcance
@@ -41,7 +41,7 @@ export default function Home() {
                     <button>Ver todos</button>
                 </div>
 
-                <script src="/src/scripts/home-products.js"></script>
+                <script src="/scripts/home-products.js"></script>
 
                 <h2 className="title">
                     Características que hacen la diferencia
@@ -56,17 +56,17 @@ export default function Home() {
                 <div className="boxes">
                     <div className="container-box">
                         <div className="item">
-                            <img src="/src/assets/home/box icon.png" alt="" />
+                            <img src="/assets/home/box icon.png" alt="" />
                             <h3>Compra y venta de productos reciclados</h3>
                             <p>Contribuye al medio ambiente mientras obtienes productos únicos.</p>
                         </div>
                         <div className="item">
-                            <img src="/src/assets/home/box icon.png" alt="" />
+                            <img src="/assets/home/box icon.png" alt="" />
                             <h3>Facilitamos donaciones para causas sostenibles</h3>
                             <p>Tu generosidad puede marcar una gran diferencia.</p>
                         </div>
                         <div className="item">
-                            <img src="/src/assets/home/box icon.png" alt="" />
+                            <img src="/assets/home/box icon.png" alt="" />
                             <h3>Servicios de recolección a tu disposición</h3>
                             <p>Hacemos que el reciclaje sea fácil y accesible.</p>
                         </div>
