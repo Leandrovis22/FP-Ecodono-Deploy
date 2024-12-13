@@ -79,11 +79,11 @@ const LoginForm = () => {
     if (!values.userEmail || !values.userPassword) {
       setIsSuccess(false);
       setShowAlert(true);
-      
+
       // Modificar el mensaje de error
       errors.userEmail = !values.userEmail ? "Todos los campos son obligatorios" : errors.userEmail;
       errors.userPassword = !values.userPassword ? "Todos los campos son obligatorios" : errors.userPassword;
-      
+
       setTimeout(() => {
         setShowAlert(false);
       }, 3000);
@@ -98,10 +98,8 @@ const LoginForm = () => {
 
       setTimeout(() => {
         setShowAlert(false);
+        navigate('/catalog');
       }, 3000);
-
-      navigate('/catalog');
-
     } else {
       setIsSuccess(false);
       setShowAlert(true);
@@ -122,20 +120,27 @@ const LoginForm = () => {
       </div>
       <p>o usa tu cuenta</p>
       <label>
-      <FontAwesomeIcon icon={faEnvelope} color="#a7a7a7"/>
+        <FontAwesomeIcon icon={faEnvelope} color="#a7a7a7" />
         <input
           type="email"
           name="userEmail"
           placeholder="Email"
           value={values.userEmail}
           onChange={handleChange}
-          className={errors.userEmail ? 'error text-[#a7a7a7]' : 'text-[#a7a7a7]'}
+          className={errors.userEmail 
+            ? 'border border-solid border-[#9d2222] text-[#a7a7a7]' 
+            : 'text-[#a7a7a7]'
+          }
         />
       </label>
-      {touched.userEmail && errors.userEmail && <div className="alerta">{errors.userEmail}</div>}
+      {touched.userEmail && errors.userEmail && (
+        <div className="w-[290px] text-center sm:text-left rounded-[7px] mb-[10px] text-[0.8rem] text-red-600">
+          {errors.userEmail}
+        </div>
+      )}
 
       <label>
-      <FontAwesomeIcon icon={faLock} color="#a7a7a7" />
+        <FontAwesomeIcon icon={faLock} color="#a7a7a7" />
         <input
           type="password"
           name="userPassword"
@@ -145,7 +150,7 @@ const LoginForm = () => {
           className={errors.userPassword ? 'error text-[#a7a7a7]' : 'text-[#a7a7a7]'}
         />
       </label>
-      {touched.userPassword && errors.userPassword && <div className="alerta">{errors.userPassword}</div>}
+      {touched.userPassword && errors.userPassword && <div className="alerta text-center sm:text-left">{errors.userPassword}</div>}
 
       <input
         type="submit"
@@ -153,8 +158,7 @@ const LoginForm = () => {
         className="iniciar-sesion"
       />
 
-      {showAlert && (
-        <div className={`alerta-${isSuccess ? 'Exito' : 'Error'}`}>
+      {showAlert && (  <div className={`    ${isSuccess ? 'bg-green-600' : 'text-red-600'}  w-full p-[0.5rem]  ${isSuccess ? 'text-white' : ''}  font-medium text-[0.8rem]  ${isSuccess ? 'mt-[10px]' : 'pb-0'} `}>
           {isSuccess ? 'Inicio de sesión exitoso' : 'Por favor, corrige los errores'}
         </div>
       )}
@@ -202,12 +206,12 @@ const RegisterForm = () => {
     if (!values.userName || !values.userEmail || !values.userPassword) {
       setIsSuccess(false);
       setShowAlert(true);
-      
+
       // Modificar los mensajes de error
       errors.userName = !values.userName ? "Todos los campos son obligatorios" : errors.userName;
       errors.userEmail = !values.userEmail ? "Todos los campos son obligatorios" : errors.userEmail;
       errors.userPassword = !values.userPassword ? "Todos los campos son obligatorios" : errors.userPassword;
-      
+
       setTimeout(() => {
         setShowAlert(false);
       }, 3000);
@@ -244,20 +248,27 @@ const RegisterForm = () => {
       </div>
 
       <label>
-      <FontAwesomeIcon icon={faUser} color="#a7a7a7"/>
+        <FontAwesomeIcon icon={faUser} color="#a7a7a7" />
         <input
           type="text"
           name="userName"
           placeholder="Nombre de usuario"
           value={values.userName}
           onChange={handleChange}
-          className={errors.userName ? 'error text-[#a7a7a7]' : 'text-[#a7a7a7]'}
+          className={errors.userName 
+            ? 'border border-solid border-[#9d2222] text-[#a7a7a7]' 
+            : 'text-[#a7a7a7]'
+          }
         />
       </label>
-      {touched.userName && errors.userName && <div className="alerta">{errors.userName}</div>}
+      {touched.userName && errors.userName && (
+  <div className="w-[290px] text-center sm:text-left rounded-[7px] mb-[10px] text-[0.8rem] text-red-600">
+    {errors.userName}
+  </div>
+)}
 
       <label>
-      <FontAwesomeIcon icon={faEnvelope} color="#a7a7a7"/>
+        <FontAwesomeIcon icon={faEnvelope} color="#a7a7a7" />
         <input
           type="email"
           name="userEmail"
@@ -267,10 +278,10 @@ const RegisterForm = () => {
           className={errors.userEmail ? 'error text-[#a7a7a7]' : 'text-[#a7a7a7]'}
         />
       </label>
-      {touched.userEmail && errors.userEmail && <div className="alerta">{errors.userEmail}</div>}
+      {touched.userEmail && errors.userEmail && <div className="alerta text-center sm:text-left">{errors.userEmail}</div>}
 
       <label>
-      <FontAwesomeIcon icon={faLock} color="#a7a7a7" />
+        <FontAwesomeIcon icon={faLock} color="#a7a7a7" />
         <input
           type="password"
           name="userPassword"
@@ -280,18 +291,24 @@ const RegisterForm = () => {
           className={errors.userPassword ? 'error text-[#a7a7a7]' : 'text-[#a7a7a7]'}
         />
       </label>
-      {touched.userPassword && errors.userPassword && <div className="alerta">{errors.userPassword}</div>}
+      {touched.userPassword && errors.userPassword && <div className="alerta text-center sm:text-left">{errors.userPassword}</div>}
 
       <input
         type="submit"
         value="Registrarse"
       />
 
-      {showAlert && (
-        <div className={`alerta-${isSuccess ? 'exito' : 'error'}`}>
-          {isSuccess ? 'Registro exitoso' : 'Por favor, corrige los errores'}
-        </div>
-      )}
+{showAlert && (
+  <div className={`
+    ${isSuccess ? 'bg-green-600' : 'text-red-600'} 
+    w-full p-[0.5rem] 
+    ${isSuccess ? 'text-white' : ''} 
+    font-medium text-[0.8rem] 
+    mt-[10px]
+  `}>
+    {isSuccess ? 'Registro exitoso' : 'Por favor, corrige los errores'}
+  </div>
+)}
     </form>
   );
 };
