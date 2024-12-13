@@ -1,6 +1,9 @@
 import "../styles/login/loginDefault.css";
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebookF, faGooglePlusG, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 
 // Utility function for form validation
 const useFormValidation = (initialState, validationRules) => {
@@ -91,30 +94,34 @@ const LoginForm = () => {
   return (
     <form className="sign" onSubmit={handleSubmit}>
       <h1>Iniciar Sesión</h1>
-      <p>Ingresa tus credenciales</p>
-
+      <div className="social-container">
+        <a href="#" className="social"><FontAwesomeIcon icon={faFacebookF} size={"lg"} /></a>
+        <a href="#" className="social"><FontAwesomeIcon icon={faGooglePlusG} size={"lg"} /></a>
+        <a href="#" className="social"><FontAwesomeIcon icon={faLinkedinIn} size={"lg"} /></a>
+      </div>
+      <p>o usa tu cuenta</p>
       <label>
-        <i className="fas fa-envelope"></i>
+      <FontAwesomeIcon icon={faEnvelope} color="#a7a7a7"/>
         <input
           type="email"
           name="userEmail"
           placeholder="Email"
           value={values.userEmail}
           onChange={handleChange}
-          className={errors.userEmail ? 'error' : ''}
+          className={errors.userEmail ? 'error text-[#a7a7a7]' : 'text-[#a7a7a7]'}
         />
       </label>
       {errors.userEmail && <div className="alerta">{errors.userEmail}</div>}
 
       <label>
-        <i className="fas fa-lock"></i>
+      <FontAwesomeIcon icon={faLock} color="#a7a7a7" />
         <input
           type="password"
           name="userPassword"
           placeholder="Contraseña"
           value={values.userPassword}
           onChange={handleChange}
-          className={errors.userPassword ? 'error' : ''}
+          className={errors.userPassword ? 'error text-[#a7a7a7]' : 'text-[#a7a7a7]'}
         />
       </label>
       {errors.userPassword && <div className="alerta">{errors.userPassword}</div>}
@@ -191,43 +198,48 @@ const RegisterForm = () => {
   return (
     <form className="register" onSubmit={handleSubmit}>
       <h1>Crear Cuenta</h1>
-      <p>Registra tus datos</p>
+
+      <div className="social-container">
+        <a href="#" className="social"><FontAwesomeIcon icon={faFacebookF} size={"lg"} /></a>
+        <a href="#" className="social"><FontAwesomeIcon icon={faGooglePlusG} size={"lg"} /></a>
+        <a href="#" className="social"><FontAwesomeIcon icon={faLinkedinIn} size={"lg"} /></a>
+      </div>
 
       <label>
-        <i className="fas fa-user"></i>
+      <FontAwesomeIcon icon={faUser} color="#a7a7a7"/>
         <input
           type="text"
           name="userName"
           placeholder="Nombre de usuario"
           value={values.userName}
           onChange={handleChange}
-          className={errors.userName ? 'error' : ''}
+          className={errors.userName ? 'error text-[#a7a7a7]' : 'text-[#a7a7a7]'}
         />
       </label>
       {errors.userName && <div className="alerta">{errors.userName}</div>}
 
       <label>
-        <i className="fas fa-envelope"></i>
+      <FontAwesomeIcon icon={faEnvelope} color="#a7a7a7"/>
         <input
           type="email"
           name="userEmail"
           placeholder="Email"
           value={values.userEmail}
           onChange={handleChange}
-          className={errors.userEmail ? 'error' : ''}
+          className={errors.userEmail ? 'error text-[#a7a7a7]' : 'text-[#a7a7a7]'}
         />
       </label>
       {errors.userEmail && <div className="alerta">{errors.userEmail}</div>}
 
       <label>
-        <i className="fas fa-lock"></i>
+      <FontAwesomeIcon icon={faLock} color="#a7a7a7" />
         <input
           type="password"
           name="userPassword"
           placeholder="Contraseña"
           value={values.userPassword}
           onChange={handleChange}
-          className={errors.userPassword ? 'error' : ''}
+          className={errors.userPassword ? 'error text-[#a7a7a7]' : 'text-[#a7a7a7]'}
         />
       </label>
       {errors.userPassword && <div className="alerta">{errors.userPassword}</div>}
@@ -328,8 +340,8 @@ export default function Login() {
               </div>
 
               <div className="overlay-right">
-                <h1>¡Hola, Amigo!</h1>
-                <p>Regístrese con su información personal para comenzar este viaje con nosotros</p>
+                <h1>¡Bienvenido nuevamente!</h1>
+                <p>Para seguir ayudando a cuidar nuestro ambiente registrese</p>
                 <button
                   id="signUp"
                   onClick={() => setIsRightPanelActive(true)}
